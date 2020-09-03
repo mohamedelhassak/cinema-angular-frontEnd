@@ -1,0 +1,90 @@
+.clikable {
+  cursor: pointer;
+}
+.list-villes{
+  background-color: #f5f5f5
+}
+.list-cinema{
+  display:flex;
+  flex-wrap: wrap
+}
+.list-cinema >li{
+  flex:1
+}
+.cinema-content{
+  background-color: #f0f2f5}
+.list-salles {
+  margin-top: 15px;
+  display: flex;
+  overflow-x: scroll;
+}
+.salle-item{
+  width:500px;
+  margin: 10px
+}
+.list-seance{
+  background-color: #f5f5f5 !important
+}
+.active {
+  background-color: rgb(28 99 66);
+  color: white;
+  border: none;
+  outline: none;
+}
+.active:hover {
+  background-color: rgb(28 99 66);
+  color: white;
+  border: none;
+  outline: none;
+}
+.active-sec {
+  background-color: rgb(92 148 122);
+  color: white;
+  border: none;
+  outline: none;
+}
+.active-sec:hover {
+  background-color: rgb(92 148 122);
+  color: white;
+  border: none;
+  outline: none;
+}
+
+.image-film {
+  border-radius: 5px;
+}
+.film-info{
+margin-top:6px}
+.list-seance {
+  background-color: #ccc;
+}
+.list-places {
+  margin-top: 15px;
+  padding: 5px;
+  display: flex;
+  justify-content: space-evenly;
+}
+.list-places .btn-ticket {
+  padding: 5px;
+  margin: 5px;
+  border-radius: 10px;
+  width: 30px;
+  height: 30px;
+  border: none;
+  outline: none;
+  font-weight: bold;
+}
+.place-unavailable {
+  cursor: no-drop;
+  background-color: #ccc;
+}
+.payement-form {
+  margin-top: 10px;
+}
+.btn-payer {
+  border-radius: 0;
+  background-color: blueviolet;
+  width: 80%;
+  border: none;
+  outline: none;
+}
