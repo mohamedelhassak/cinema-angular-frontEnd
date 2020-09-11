@@ -1,5 +1,5 @@
-import { Injectable, HostListener } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import {Injectable} from '@angular/core';
+import {HttpClient} from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root',
@@ -7,14 +7,16 @@ import { HttpClient } from '@angular/common/http';
 export class CinemaService {
   public HOST: String = 'http://localhost:9093/';
 
-  constructor(private httpClient: HttpClient) {}
+  constructor(private httpClient: HttpClient) {
+  }
 
   public getVilles() {
-    return this.httpClient.get(this.HOST + '/villes');
+    return this.httpClient.get(this.HOST + 'villes');
   }
 
   public getCinemas(v: any) {
-    return this.httpClient.get(v._links.cinemas.href);
+    let url = v._links.cinemas.href.replace('{?projection}', '');
+    return this.httpClient.get(url);
   }
 
   public getSalles(c: any) {
@@ -23,13 +25,14 @@ export class CinemaService {
 
   public getProjections(salle: any) {
     let url = salle._links.projections.href.replace('{?projection}', '');
-    return this.httpClient.get(url + '?projection=p1');
+    return this.httpClient.get(url + '?projection=projectionsProj');
   }
 
   public getTicketsPlaces(p: any) {
     let url = p._links.tickets.href.replace('{?projection}', '');
-    return this.httpClient.get(url + '?projection=ticketsproj');
+    return this.httpClient.get(url + '?projection=ticketsProj');
   }
+
   public payerTickets(dataForm) {
     return this.httpClient.post(this.HOST + 'payerTickets', dataForm);
   }

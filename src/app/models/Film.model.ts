@@ -1,7 +1,7 @@
 import {CategoryModel} from "./Category.model";
 
-export interface FilmRequestModelModel {
-
+export interface FilmModel {
+  id:number
   titre: string;
   description: string;
   category: CategoryModel

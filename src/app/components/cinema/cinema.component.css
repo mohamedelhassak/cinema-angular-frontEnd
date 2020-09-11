@@ -1,6 +1,12 @@
 .clikable {
   cursor: pointer;
+  transition: all .4s ease-in;
 }
+.clikable:hover{
+  background-color: rgb(34 34 34);
+  color: white
+}
+
 .list-villes-title {
   background-color: black;
   opacity: 0.7;
@@ -9,65 +15,80 @@
   font-weight: 600;
   padding: 10px;
 }
+
 .list-cinema {
   display: flex;
   flex-wrap: wrap;
 }
+
 .list-cinema > li {
   flex: 1;
 }
+
 .cinema-content {
   background-color: #f0f2f5;
 }
+
 .list-salles {
   margin-top: 15px;
   display: flex;
   overflow-x: scroll;
 }
+
 .list-salles::-webkit-scrollbar {
-  height: 10px ;
+  height: 10px;
   background-color: #f5f5f5;
 }
+
+
 .list-salles::-webkit-scrollbar-track {
   box-shadow: inset 0 0 5px grey;
   border-radius: 6px;
 }
+
 .list-salles::-webkit-scrollbar-thumb {
   background-color: rgb(112 196 157);
   border-radius: 6px
 }
+
 .list-salles::-webkit-scrollbar-track {
   -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
   background-color: #f5f5f5;
 }
+
 .salle-item {
   width: 500px;
   margin: 10px;
-    -moz-box-shadow: 3px 1px 8px 1px #2E281C;/*FF 3.5+*/
-    -webkit-box-shadow: 3px 1px 8px 1px #2E281C;/*Saf3-4, Chrome, iOS 4.0.2-4.2, Android 2.3+*/
-    box-shadow: 3px 1px 8px 1px #2E281C;/* FF3.5+, Opera 9+, Saf1+, Chrome, IE10 */
+  -moz-box-shadow: 3px 1px 8px 1px #2E281C; /*FF 3.5+*/
+  -webkit-box-shadow: 3px 1px 8px 1px #2E281C; /*Saf3-4, Chrome, iOS 4.0.2-4.2, Android 2.3+*/
+  box-shadow: 3px 1px 8px 1px #2E281C; /* FF3.5+, Opera 9+, Saf1+, Chrome, IE10 */
 }
+
 .list-seance {
   background-color: #f5f5f5 !important;
 }
+
 .active {
-  background-color: rgb(28 99 66);
+  background-color: rgb(34 34 34);
   color: white;
   border: none;
   outline: none;
 }
+
 .active:hover {
-  background-color: rgb(28 99 66);
+  background-color:black;
   color: white;
   border: none;
   outline: none;
 }
+
 .active-sec {
   background-color: rgb(92 148 122);
   color: white;
   border: none;
   outline: none;
 }
+
 .active-sec:hover {
   background-color: rgb(92 148 122);
   color: white;
@@ -75,21 +96,38 @@
   outline: none;
 }
 
-.image-film {
-  border-radius: 5px;
+.image-film{
+  transition: all .5s ease-in-out;
+  border-radius: 14px;
+  width: 100%;
+  height: 240px;
+  object-fit: contain;
 }
+.image-film:hover{
+  border-radius: 10px;
+  -moz-transform:  scale(1.1, 1.1) ;
+  -webkit-transform: scale(1.1, 1.1);
+  -o-transform:  scale(1.1, 1.1) ;
+  -ms-transform:  scale(1.1, 1.1) ;
+  transform:  scale(1.1, 1.1) ;
+  /*height: 266px;*/
+}
+
 .film-info {
   margin-top: 6px;
 }
+
 .list-seance {
   background-color: #ccc;
 }
+
 .list-places {
   margin-top: 15px;
   padding: 5px;
   display: flex;
   justify-content: space-evenly;
 }
+
 .list-places .btn-ticket {
   padding: 5px;
   margin: 5px;
@@ -100,13 +138,16 @@
   outline: none;
   font-weight: bold;
 }
+
 .place-unavailable {
   cursor: no-drop;
   background-color: #ccc;
 }
+
 .payement-form {
   margin-top: 10px;
 }
+
 .btn-payer {
   border-radius: 0;
   background-color: blueviolet;
@@ -124,31 +165,66 @@
     overflow-x: scroll;
     margin-top: 10px;
   }
+
   .list-villes::-webkit-scrollbar {
-    width:1px !important;
+    width: 1px !important;
     height: 5px !important;
     background-color: #f5f5f5;
-}
- .list-villes::-webkit-scrollbar-track {
-  box-shadow: inset 0 0 5px grey;
-  border-radius: 6px;
-}
+  }
+
+  .list-villes::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 5px grey;
+    border-radius: 6px;
+  }
+
   .list-villes::-webkit-scrollbar-thumb {
     background-color: rgb(112 196 157);
     border-radius: 6px;
   }
+
   .list-villes::-webkit-scrollbar-track {
     -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
     background-color: #f5f5f5;
   }
-  .list-villes{
-    padding:1px
+
+  .list-villes {
+    padding: 1px
   }
+
   .list-villes-item {
     margin: 2px;
     padding: 10px;
     flex: 1;
     border-radius: 5px;
   }
+}
+
+/*loader style*/
+
+.loader {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  z-index: 1;
+  width: 60px;
+  height: 60px;
+  margin: -75px 0 0 -75px;
+  border: 16px solid #f3f3f3;
+  border-radius: 50%;
+  border-top: 16px solid #3498db;
+  width: 120px;
+  height: 120px;
+  -webkit-animation: spin 2s linear infinite;
+  animation: spin 2s linear infinite;
+}
+
+@-webkit-keyframes spin {
+  0% { -webkit-transform: rotate(0deg); }
+  100% { -webkit-transform: rotate(360deg); }
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
 }
 

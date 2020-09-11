@@ -1,0 +1,28 @@
+<div class="container register">
+  <div class="col-md-6 col-md-offset-3 alert alert-danger" *ngIf="mode==0 && errorMessage">
+    <strong>{{errorMessage}}</strong>
+  </div>
+  <div class="row col-md-6 col-md-offset-3" *ngIf="mode==0">
+    <div class="panel panel-default">
+      <div class="panel-heading">Registration</div>
+      <div class="panel-body">
+        <form #f="ngForm" (ngSubmit)="onRegister(f.value)">
+          <div class="form-group">
+            <label class="control-label">Usename</label>
+            <input type="text" name="username" ngModel="" class="form-control" required/>
+          </div>
+          <div class="form-group">
+            <label class="control-label">Password</label>
+            <input type="password" name="password" ngModel="" class="form-control" required/>
+          </div>
+          <div class="form-group">
+            <label class="control-label">Confirm Password</label>
+            <input type="password" name="repassword" ngModel="" class="form-control" required/>
+          </div>
+          <button [disabled]="!f.valid" type="submit" class="btn btn-success">Register</button>
+          <button (click)="onRetourToLogin()"  class="btn btn-danger">Login</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

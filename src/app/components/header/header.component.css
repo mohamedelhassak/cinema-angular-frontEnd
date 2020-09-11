@@ -1,0 +1,7 @@
+.link-active{
+  background-color: #000;
+  color: white;
+  font-weight: bold;
+  transition: all .6s ease-in-out;
+}
+

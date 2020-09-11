@@ -1,0 +1,29 @@
+<nav class="navbar  navbar-inverse">
+  <div class="container-fluid navbar-links">
+    <div class="navbar-header">
+      <a class="navbar-brand" routerLink="/" routerLinkActive="link-active"
+         [routerLinkActiveOptions]="{exact:true}"><strong>MyCinema</strong></a>
+    </div>
+    <ul class="nav navbar-nav">
+      <li *ngIf="authService.isLogged && authService.isAdmin()"><a routerLink="admin/villes"
+                                                                   routerLinkActive="link-active"
+                                                                   [routerLinkActiveOptions]="{exact:true}">Villes</a></li>
+      <li *ngIf="authService.isLogged && authService.isAdmin()"><a routerLink="admin/cinemas"
+                                                                   routerLinkActive="link-active"
+                                                                   [routerLinkActiveOptions]="{exact:true}">Cinemas</a></li>
+      <li *ngIf="authService.isLogged && authService.isAdmin()"><a routerLink="admin/categories"
+                                                                   routerLinkActive="link-active"
+                                                                   [routerLinkActiveOptions]="{exact:true}">Categories</a>
+      </li>
+      <li *ngIf="authService.isLogged && authService.isAdmin()"><a routerLink="admin/films"
+                                                                   routerLinkActive="link-active"
+                                                                   [routerLinkActiveOptions]="{exact:true}">Films</a>
+      </li>
+        <li *ngIf="!authService.isLogged"><a routerLink="/login"><span class="btn btn-danger">Login</span></a></li>
+        <li *ngIf="!authService.isLogged"><a routerLink="/register"><span class="btn btn-success">Register</span></a></li>
+        <li *ngIf="authService.isLogged"><a><span class="badge">Welcome @{{authService.username}}</span></a></li>
+        <li *ngIf="authService.isLogged" (click)="authService.logout()"><a>Logout</a></li>
+
+    </ul>
+  </div>
+</nav>

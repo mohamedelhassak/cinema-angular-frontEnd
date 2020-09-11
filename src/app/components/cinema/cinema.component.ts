@@ -1,20 +1,17 @@
-import { Component, OnInit } from '@angular/core';
-import { CinemaService } from '../../services/cinema.service';
-import { TicketForm } from '../../models/TicketForm';
-import {
-  trigger,
-  state,
-  style,
-  animate,
-  transition,
-} from '@angular/animations';
+import {Component, OnInit} from '@angular/core';
+import {CinemaService} from '../../services/cinema.service';
+import {TicketFormModel} from '../../models/TicketForm.model';
+import {AuthService} from "../../services/auth.service";
+
 @Component({
   selector: 'app-cinema',
   templateUrl: './cinema.component.html',
   styleUrls: ['./cinema.component.css'],
 })
 export class CinemaComponent implements OnInit {
-  constructor(public cinemaService: CinemaService) {}
+  constructor(public cinemaService: CinemaService,
+              private authService: AuthService) {
+  }
 
   public villes;
   public cinemas;
@@ -23,6 +20,8 @@ export class CinemaComponent implements OnInit {
   public currentCinema;
   public currentProjection;
   public selectedTicked;
+  public isTiketOpen=false
+  public isLoading=false
 
   ngOnInit(): void {
     this.chargerVilles();
@@ -51,7 +50,9 @@ export class CinemaComponent implements OnInit {
       }
     );
   }
+
   onGetSalles(c) {
+    this.isLoading=true;
     this.salles = undefined;
     this.currentCinema = c;
     this.cinemaService.getSalles(c).subscribe(
@@ -66,15 +67,19 @@ export class CinemaComponent implements OnInit {
               console.log(err);
             }
           );
-          // console.log(this.salles);
         });
+        this.isLoading=false
       },
       (err) => {
         console.log(err);
       }
     );
+
   }
+
   onGetTicketsPlaces(p) {
+    if (this.currentProjection==p)this.isTiketOpen = !this.isTiketOpen
+
     this.currentProjection = p;
     this.cinemaService.getTicketsPlaces(p).subscribe(
       (data) => {
@@ -86,6 +91,7 @@ export class CinemaComponent implements OnInit {
       }
     );
   }
+
   onSelectTickets(t) {
     if (!t.selected) {
       t.selected = true;
@@ -95,6 +101,7 @@ export class CinemaComponent implements OnInit {
       this.selectedTicked.splice(this.selectedTicked.indexOf(t), 1);
     }
   }
+
   getTicketState(t) {
     let str = 'btn ';
     if (t.estReserver) {
@@ -106,20 +113,25 @@ export class CinemaComponent implements OnInit {
     }
     return str;
   }
-  onPayTickets(dataForm: TicketForm) {
-    let tickets = [];
-    this.selectedTicked.forEach((ticket) => {
-      tickets.push(ticket.id);
-    });
-    dataForm.tickets = tickets;
-    this.cinemaService.payerTickets(dataForm).subscribe(
-      (data) => {
-        alert('payement est faite ..');
-        this.onGetTicketsPlaces(this.currentProjection);
-      },
-      (err) => {
-        console.log(err);
-      }
-    );
+
+  onPayTickets(dataForm: TicketFormModel) {
+    if (this.authService.isLogged) {
+      let tickets = [];
+      this.selectedTicked.forEach((ticket) => {
+        tickets.push(ticket.id);
+      });
+      dataForm.tickets = tickets;
+      this.cinemaService.payerTickets(dataForm).subscribe(
+        (data) => {
+          alert('payement est faite ..');
+          this.onGetTicketsPlaces(this.currentProjection);
+        },
+        (err) => {
+          console.log(err);
+        }
+      );
+    } else {
+      alert("veuillez s'authentifier tout d'abord...")
+    }
   }
 }

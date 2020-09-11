@@ -1,16 +1,7 @@
-<nz-layout class="layout">
-<!--  <nz-header>-->
-<!--    <ul nz-menu  nzMode="horizontal">-->
-<!--      <li nz-menu-item routerLink="/">Home</li>-->
+<app-header></app-header>
+<br/>
+<div class="container-fluid main-content">
+  <router-outlet></router-outlet>
+</div>
 
-<!--    </ul>-->
-<!--  </nz-header>-->
-  <nz-content class="main-content">
-    <nz-breadcrumb [nzAutoGenerate]="true"></nz-breadcrumb>
 
-    <div class="inner-content">
-      <router-outlet>
-      </router-outlet>
-    </div>
-  </nz-content >
-</nz-layout>
