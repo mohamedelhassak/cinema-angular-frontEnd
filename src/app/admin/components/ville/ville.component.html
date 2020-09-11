@@ -1,0 +1,72 @@
+<div class="list-cat container">
+
+  <div class="row">
+    <div class="col-sm-6">
+      <form #f="ngForm" (ngSubmit)="onAddVille(f.value)">
+        <input type="text" name="name" ngModel="" class="form-control" placeholder="Enter un nom de la ville..."
+               required/>
+
+        <br/>
+        <button [disabled]="!f.valid" class="btn btn-success">Ajouter</button>
+      </form>
+    </div>
+
+    <!--  search zone    -->
+    <div class="col-sm-6">
+      <form #f="ngForm" (click)="onSearchVille()">
+        <input type="text" name="villeToSearch"  [(ngModel)]="villeToSearch" class="form-control" placeholder="Chercher une  ville..."
+               required/>
+        <br/>
+        <button [disabled]="!villeToSearch" class="btn btn-primary">Recherche</button>
+        <button *ngIf="resTrouvee" (click)="onLoadVilles()"  class="btn btn-primary">Refresh</button>
+      </form>
+    </div>
+
+  </div>
+
+  <br/>
+
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      List des Categories
+    </div>
+    <div *ngIf="villes" class="panel-body">
+      <table class="table table-hover table-condensed  ">
+        <thead>
+        <tr>
+          <th>Nom</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let v of villes">
+          <td>{{ v.name }}</td>
+
+          <td>
+
+            <button
+              (click)="onDeleteCat(v)"
+              class="btn btn-danger ">
+              <i class="glyphicon  glyphicon-trash"></i>
+            </button>
+            <button class="btn btn-warning">
+              <i class="glyphicon glyphicon-edit"></i>
+            </button>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+
+    </div>
+  </div>
+
+
+  <!--  pagination-->
+  <div class="col-md-6 col-md-offset-3">
+    <nav style="text-align: center" aria-label="Page navigation example">
+      <ul class="pagination justify-content-center">
+        <li class="page-item" *ngFor="let p of pages;let i=index"><a [ngClass]="{'page-active':nbPages==i}" class="page-link " (click)="goToPage(i)">{{i+1}}</a></li>
+      </ul>
+    </nav>
+  </div>
+</div>
+

@@ -1,22 +1,24 @@
 <div class="">
   <!-- afficher les villes -->
-  <div class="col-md-2 col-sm-4 ">
+  <div class="col-md-2 col-sm-4">
     <ul *ngIf="villes" class="list-group">
-      <li
-        *ngFor="let v of villes._embedded.villes"
-        class="list-group-item clikable list-villes"
-        [ngClass]="{ active: v == currentVille }"
-        (click)="onGetCinema(v)"
-      >
-        {{ v.name }}
-      </li>
+      <div class="list-villes">
+        <li
+          *ngFor="let v of villes._embedded.villes"
+          class="list-group-item clikable list-villes-item"
+          [ngClass]="{ active: v == currentVille }"
+          (click)="onGetCinema(v)"
+        >
+          {{ v.name }}
+        </li>
+      </div>
     </ul>
   </div>
 
-<!--  le contenu-->
+  <!--  le contenu-->
   <div class="col-md-10 col-sm-8">
-    <div *ngIf="cinemas" class="panel panel-default">
-      <div class="panel-heading ">
+    <div *ngIf="cinemas" class="panel panel">
+      <div class="panel-heading">
         Listes Des Cinemas Dans
         <strong *ngIf="currentVille">{{ currentVille.name }}</strong>
       </div>
@@ -26,21 +28,20 @@
             *ngFor="let c of cinemas._embedded.cinemas"
             class="clikable btn btn-default"
             [ngClass]="{ active: c == currentCinema }"
-            (click)="onGetSalles(c) "
-
+            (click)="onGetSalles(c)"
           >
             {{ c.name }}
           </li>
         </ul>
         <!-- afficher salles -->
-        <div  *ngIf="salles" class="row list-salles">
+        <div *ngIf="salles" class="row list-salles">
           <div
-            *ngFor="let s of salles._embedded.salles "
+            *ngFor="let s of salles._embedded.salles"
             class="col-md-12 col-sm-12"
           >
             <div *ngIf="salles" class="panel panel-default salle-item">
               <div *ngIf="s.projections">
-                <div class="panel-heading ">
+                <div class="panel-heading">
                   <strong
                     >{{ s.name }} :
                     {{
@@ -50,34 +51,48 @@
                 </div>
               </div>
 
-              <div *ngIf="s.projections" class="panel-body ">
+              <div *ngIf="s.projections" class="panel-body">
                 <div class="row">
-                  <div class="col-md-6">
+                  <div class="col-md-6 col-sm-6">
                     <div class="">
                       <img
                         class="image-film"
-
                         src="{{
-                        cinemaService.HOST +
-                          'getImageFilm/' +
-                          s.projections._embedded.projections[0].film.id
-                      }}"
+                          cinemaService.HOST +
+                            'getImageFilm/' +
+                            s.projections._embedded.projections[0].film.id
+                        }}"
                         alt="{{
-                        s.projections._embedded.projections[0].film.titre
-                      }}"
+                          s.projections._embedded.projections[0].film.titre
+                        }}"
                       />
                     </div>
 
-                      <div class=" film-info ">
-                        <p><strong>Description : </strong>{{s.projections._embedded.projections[0].film.description}}</p>
-                        <h5><strong>Annee : </strong>{{s.projections._embedded.projections[0].film.date_sortie |date:'y'}}</h5>
-                        <h5><strong>Duree : </strong>{{s.projections._embedded.projections[0].film.duree }} h</h5>
-                      </div>
+                    <div class="film-info">
+                      <p>
+                        <strong>Description : </strong
+                        >{{
+                          s.projections._embedded.projections[0].film
+                            .description
+                        }}
+                      </p>
+                      <h5>
+                        <strong>Annee : </strong
+                        >{{
+                          s.projections._embedded.projections[0].film
+                            .date_sortie | date: "y"
+                        }}
+                      </h5>
+                      <h5>
+                        <strong>Duree : </strong
+                        >{{ s.projections._embedded.projections[0].film.duree }}
+                        h
+                      </h5>
                     </div>
-
+                  </div>
 
                   <!-- afficher les eances -->
-                  <div class="col-md-6">
+                  <div class="col-md-6 col-sm-6">
                     <ul *ngIf="villes" class="list-group">
                       <li class="list-group-item list-seance">Seances :</li>
                       <li

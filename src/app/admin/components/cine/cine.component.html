@@ -1,0 +1,54 @@
+<div class="container   ">
+  <div>
+    <button (click)="onNewCinema()" class="btn btn-success">Ajouter Cinema</button>
+  </div>
+  <br/>
+
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      List des cinemas
+    </div>
+    <div *ngIf="cinemas" class="panel-body">
+      <table class="table table-hover table-condensed ">
+        <thead >
+        <tr>
+          <th>Nom</th>
+          <th>Ville</th>
+          <th>nombre de salles</th>
+
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let c of cinemas._embedded.cinemas">
+          <td>{{ c.name }}</td>
+          <td>{{c.ville.name}}</td>
+          <td>{{ c.nbSalles }}</td>
+          <td>
+            <button
+              (click)="onDeleteCinema(c)"
+              class="btn btn-danger ">
+              <i class="glyphicon  glyphicon-trash"></i>
+            </button>
+            <button
+              (click)="onEditCinema(c.id)"
+              class="btn btn-warning">
+              <i class="glyphicon glyphicon-edit"></i>
+            </button>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+
+    </div>
+  </div>
+
+  <!--  pagination-->
+  <div class="col-md-6 col-md-offset-3">
+    <nav style="text-align: center" aria-label="Page navigation example">
+      <ul class="pagination justify-content-center">
+        <li class="page-item" *ngFor="let p of pages;let i=index"><a [ngClass]="{'page-active':nbPages==i}" class="page-link " (click)="goToPage(i)">{{i+1}}</a></li>
+      </ul>
+    </nav>
+  </div>
+</div>
+

@@ -1,14 +1,21 @@
 import { Component, OnInit } from '@angular/core';
 import { CinemaService } from '../../services/cinema.service';
-import { trigger, state, style, animate, transition } from '@angular/animations';
+import { TicketForm } from '../../models/TicketForm';
+import {
+  trigger,
+  state,
+  style,
+  animate,
+  transition,
+} from '@angular/animations';
 @Component({
   selector: 'app-cinema',
   templateUrl: './cinema.component.html',
   styleUrls: ['./cinema.component.css'],
-
 })
 export class CinemaComponent implements OnInit {
   constructor(public cinemaService: CinemaService) {}
+
   public villes;
   public cinemas;
   public salles;
@@ -17,10 +24,10 @@ export class CinemaComponent implements OnInit {
   public currentProjection;
   public selectedTicked;
 
-
   ngOnInit(): void {
     this.chargerVilles();
   }
+
   chargerVilles() {
     this.cinemaService.getVilles().subscribe(
       (data) => {
@@ -99,7 +106,7 @@ export class CinemaComponent implements OnInit {
     }
     return str;
   }
-  onPayTickets(dataForm) {
+  onPayTickets(dataForm: TicketForm) {
     let tickets = [];
     this.selectedTicked.forEach((ticket) => {
       tickets.push(ticket.id);

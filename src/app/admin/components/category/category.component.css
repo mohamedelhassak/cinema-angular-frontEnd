@@ -1,0 +1,13 @@
+.list-cat {
+  margin-top: 30px;
+}
+.page-active{
+  background-color: black;
+  color: white;
+  font-weight: bold
+}
+.page-active:hover{
+  background-color: black;
+  color: white;
+  font-weight: bold
+}

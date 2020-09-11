@@ -1,0 +1,54 @@
+<div class="container ajout-film">
+  <div class="col-md-8 col-md-offset-2 alert alert-danger" *ngIf="errorMessage">
+    <strong>{{errorMessage}}</strong>
+  </div>
+  <div class="row col-md-8 col-md-offset-2">
+    <div class="panel panel-default">
+      <div class="panel-heading">Ajouter Neuveau Film</div>
+      <div class="panel-body">
+        <form #f="ngForm" (ngSubmit)="onAddFim(f.value)">
+          <div class="col-sm-6">
+            <div class="form-group">
+              <label class="control-label">Titre</label>
+              <input type="text" name="titre" ngModel="" class="form-control" required/>
+            </div>
+            <div class="form-group">
+              <label class="control-label">Description</label>
+              <textarea type="text" name="description" ngModel="" class="form-control" required></textarea>
+            </div>
+            <div class="form-group">
+              <label class="control-label">Choisir La categorie </label>
+              <select class="form-control" name="category" ngModel="" *ngIf="categories">
+                <option *ngFor="let cat of categories._embedded.categories" value="{{cat.id}}">{{cat.name}}</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="control-label">Realisateur</label>
+              <input type="text" name="realisateur" ngModel="" class="form-control" required/>
+            </div>
+            <div class="form-group">
+              <label class="control-label">Date de sortie</label>
+              <input type="date" name="date_sortie" ngModel="" class="form-control" required/>
+            </div>
+            <div class="form-group">
+              <label class="control-label">La duree</label>
+              <input type="number" min="1" name="duree" ngModel="" class="form-control" required/>
+            </div>
+          </div>
+
+          <div class="col-sm-6">
+            <div class="form-group">
+              <label class="control-label">Upload Un Image </label>
+              <input type="file" (change)="onFileChanged($event)" name="photo" class="form-control" placeholder="Photo du film..."
+                     accept="image/*" required/>
+              <br>
+              <img [src]="imgURL" height="300px" width="300px" style="object-fit: contain" *ngIf="imgURL">
+            </div>
+            <button [disabled]="!f.valid" type="submit" class="btn btn-danger">Ajouter</button>
+            <button (click)="onRetoutToList()" class="btn btn-success">list des films</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
