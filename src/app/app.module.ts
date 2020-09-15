@@ -11,6 +11,7 @@ import {en_US, NZ_I18N} from 'ng-zorro-antd/i18n';
 import {registerLocaleData} from '@angular/common';
 import en from '@angular/common/locales/en';
 import {NgZorroAntdModule, NzLayoutModule} from 'ng-zorro-antd';
+import { ToastrModule } from 'ngx-toastr';
 import {FilmComponent} from './admin/components/film/film.component';
 import {LoginComponent} from './components/login/login.component';
 import {RegisterComponent} from './components/register/register.component';
@@ -37,6 +38,7 @@ registerLocaleData(en);
     NzLayoutModule,
     FormsModule,
     BrowserAnimationsModule,
+    ToastrModule.forRoot()
   ],
   providers: [{provide: NZ_I18N, useValue: en_US}],
   bootstrap: [AppComponent],

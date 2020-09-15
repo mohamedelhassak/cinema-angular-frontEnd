@@ -22,7 +22,7 @@
         <li *ngIf="!authService.isLogged"><a routerLink="/login"><span class="btn btn-danger">Login</span></a></li>
         <li *ngIf="!authService.isLogged"><a routerLink="/register"><span class="btn btn-success">Register</span></a></li>
         <li *ngIf="authService.isLogged"><a><span class="badge">Welcome @{{authService.username}}</span></a></li>
-        <li *ngIf="authService.isLogged" (click)="authService.logout()"><a>Logout</a></li>
+        <li *ngIf="authService.isLogged" (click)="logout()"><a>Logout</a></li>
 
     </ul>
   </div>

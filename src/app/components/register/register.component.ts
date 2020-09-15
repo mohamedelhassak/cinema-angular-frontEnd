@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {AuthService} from '../../services/auth.service';
 import {Router} from "@angular/router";
+import {UtilService} from "../../services/util.service";
 
 @Component({
   selector: 'app-register',
@@ -14,7 +15,8 @@ export class RegisterComponent implements OnInit {
   errorMessage: string;
 
   constructor(private authService: AuthService,
-              private router: Router) {
+              private router: Router,
+              private utilService:UtilService) {
   }
 
   ngOnInit() {
@@ -28,11 +30,21 @@ export class RegisterComponent implements OnInit {
           this.user = data;
           this.mode = 1;
           this.router.navigateByUrl("/login");
+          this.showSuccess("votre compte est bien créé.")
         },
         err => {
-          this.errorMessage = err.error.message;
+          // this.errorMessage = err.error.message;
+          this.showError(err.error.message);
           this.mode = 0;
         })
+  }
+
+
+  showSuccess(msg:string){
+    this.utilService.showSuccess(msg,"Message!")
+  }
+  showError(err:string){
+    this.utilService.showError(err,"Erreur!")
   }
 
 }

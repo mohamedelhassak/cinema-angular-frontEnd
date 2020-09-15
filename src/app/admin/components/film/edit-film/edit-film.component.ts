@@ -80,7 +80,11 @@ export class EditFilmComponent implements OnInit {
   onEditFim(dataForm:FilmModel){
     const film = dataForm;
     const uploadData = new FormData();
-    uploadData.append('file', this.selectedFile);
+
+
+    uploadData.append('file',this.selectedFile);
+
+
     uploadData.append('film', JSON.stringify(film));
     this.resourceService.updateResource(uploadData, "films/updateFilm/"+this.id)
       .subscribe(

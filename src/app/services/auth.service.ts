@@ -42,7 +42,6 @@ export class AuthService {
       this.username = jwt_decode(this.jwtToken).sub;
     }
     this.isLogged = true;
-    console.log("roles", this.roles)
   }
 
   loadToken() {
@@ -56,7 +55,7 @@ export class AuthService {
     this.isLogged = false;
     this.username = "";
     this.roles = [];
-    this.router.navigateByUrl("/login")
+    this.router.navigateByUrl("/login");
   }
 
   isAdmin() {

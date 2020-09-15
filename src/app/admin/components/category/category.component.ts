@@ -32,7 +32,7 @@ export class CategoryComponent implements OnInit {
   onSearchCat(){
     let cats = this.d._embedded.categories;
     if (this.catToSearch){
-      let results= cats.filter(x => x.name.toLowerCase().includes(this.catToSearch));
+      let results= cats.filter(x => x.name.toLowerCase().includes(this.catToSearch.toLowerCase()));
       this.categories = results
       this.resTrouvee = true;
     }

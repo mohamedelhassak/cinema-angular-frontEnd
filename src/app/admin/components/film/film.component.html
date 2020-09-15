@@ -9,7 +9,7 @@
       List des Films
     </div>
     <div *ngIf="films" class="panel-body">
-      <table class="table table-hover table-condensed ">
+      <table class="table table-hover  ">
         <thead >
         <tr>
           <th>Titre</th>
@@ -31,14 +31,9 @@
           <td>{{ f.duree }} H</td>
           <td><img
             width="70px"
-            src="{{
-                          cinemaService.HOST +
-                            'getImageFilm/' +
-                            f.id
-                        }}"
-            alt="{{
-                          f.titre
-                        }}"
+            height="90px"
+            src="{{cinemaService.HOST +'getImageFilm/' + f.id}}"
+            alt="{{f.titre}}"
           /></td>
           <td>
             <button
@@ -59,8 +54,8 @@
     </div>
   </div>
 
-    <div class="col-md-6 col-md-offset-3">
-      <nav style="text-align: center" aria-label="Page navigation example">
+    <div >
+      <nav  aria-label="Page navigation example">
         <ul class="pagination justify-content-center">
           <li class="page-item" *ngFor="let p of pages;let i=index"><a [ngClass]="{'page-active':nbPages==i}" class="page-link " (click)="goToPage(i)">{{i+1}}</a></li>
         </ul>

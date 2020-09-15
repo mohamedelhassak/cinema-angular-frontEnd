@@ -2,6 +2,8 @@ import {Component, OnInit} from '@angular/core';
 import {CinemaService} from '../../services/cinema.service';
 import {TicketFormModel} from '../../models/TicketForm.model';
 import {AuthService} from "../../services/auth.service";
+import {UtilService} from "../../services/util.service";
+import {ModalDismissReasons, NgbModal} from "@ng-bootstrap/ng-bootstrap";
 
 @Component({
   selector: 'app-cinema',
@@ -10,7 +12,9 @@ import {AuthService} from "../../services/auth.service";
 })
 export class CinemaComponent implements OnInit {
   constructor(public cinemaService: CinemaService,
-              private authService: AuthService) {
+              private authService: AuthService,
+              private utilService:UtilService,
+              private modalService: NgbModal) {
   }
 
   public villes;
@@ -20,11 +24,16 @@ export class CinemaComponent implements OnInit {
   public currentCinema;
   public currentProjection;
   public selectedTicked;
-  public isTiketOpen=false
-  public isLoading=false
+  public isTiketOpen=false;
+  public isLoading=false;
+  public nomClient:string;
+  public closeResult: string;
 
   ngOnInit(): void {
     this.chargerVilles();
+    if (this.authService.username){
+      this.nomClient = this.authService.username;
+    }
   }
 
   chargerVilles() {
@@ -123,15 +132,26 @@ export class CinemaComponent implements OnInit {
       dataForm.tickets = tickets;
       this.cinemaService.payerTickets(dataForm).subscribe(
         (data) => {
-          alert('payement est faite ..');
+          this.showSuccess("votre paiement est bien effectué")
           this.onGetTicketsPlaces(this.currentProjection);
         },
         (err) => {
-          console.log(err);
+          this.showError("veuillez réessayer à nouveau");
         }
       );
     } else {
-      alert("veuillez s'authentifier tout d'abord...")
+      this.showInfo("Veuillez s'authentifier tout d'abord...");
     }
   }
+
+  showSuccess(msg:string){
+    this.utilService.showSuccess(msg,"Félicitation !")
+  }
+  showError(err:string){
+    this.utilService.showError(err,"Erreur!")
+  }
+  showInfo(info:string){
+    this.utilService.showInfo(info,"Info!")
+  }
+
 }

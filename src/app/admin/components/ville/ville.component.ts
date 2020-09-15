@@ -35,7 +35,7 @@ export class VilleComponent implements OnInit {
   onSearchVille(){
     let villes = this.d._embedded.villes;
     if (this.villeToSearch){
-      let results= villes.filter(x => x.name.toLowerCase().includes(this.villeToSearch));
+      let results= villes.filter(x => x.name.toLowerCase().includes(this.villeToSearch.toLowerCase()));
       this.villes = results
       console.log(results)
       this.resTrouvee = true;

@@ -1,4 +1,5 @@
 <div class="">
+
   <!-- afficher les villes -->
   <div class="col-md-2 col-sm-4">
     <ul *ngIf="villes" class="list-group">
@@ -14,6 +15,9 @@
       </div>
     </ul>
   </div>
+
+
+
 
 
   <!--  le contenu-->
@@ -35,7 +39,7 @@
             {{ c.name }}
 
           </li>
-          <div *ngIf="isLoading"  class="loader"></div>
+
         </ul>
         <!-- afficher salles -->
         <div *ngIf="salles && !isLoading" class="row list-salles">
@@ -145,7 +149,7 @@
                                type="text"
                                placeholder="Entrer Votre Nom..."
                                name="nomClient"
-                               ngModel
+                               [(ngModel)]="nomClient"
                                required
                              />
                            </div>
@@ -183,4 +187,10 @@
       </div>
     </div>
   </div>
+
+  <!--  loader-->
+    <div *ngIf="isLoading"  class="loader"></div>
+
+
 </div>
+
